@@ -3,7 +3,7 @@
 from typing import List
 
 # Function Definition of insertion sort. It sorts the integer array in-place.
-def insertion_sort(arr: List[int]) -> None:
+def insertion_sort(arr: List[int], ascending=True) -> None:
     n = len(arr)
 
     for i in range(1, n):
@@ -11,11 +11,20 @@ def insertion_sort(arr: List[int]) -> None:
         # If they are in the right order we just insert them into our sorted region. - break the loop
         # If not we swap until we know that element is in the sorted region.
         for j in range(i, 0, -1):
-            if arr[j - 1] > arr[j]:
-                arr[j - 1], arr[j] = arr[j], arr[j - 1]
+            if ascending:
+                if arr[j - 1] > arr[j]:
+                    arr[j - 1], arr[j] = arr[j], arr[j - 1]
+
+                else:
+                    break
 
             else:
-                break
+                if arr[j - 1] < arr[j]:
+                    arr[j - 1], arr[j] = arr[j], arr[j - 1]
+
+                else:
+                    break
+
 
 
 if __name__ == "__main__":
@@ -23,4 +32,10 @@ if __name__ == "__main__":
     print(f"Before sorting the integer array: {nums}")
     insertion_sort(nums)
     print(f"After sorting the integer array in Ascending Order: {nums}")
+    print()
+
+    nums = [-5, 3, 2, 1, -3, 4, -2, 7, 2, 2]
+    print(f"Before sorting the integer array: {nums}")
+    insertion_sort(nums, ascending=False)
+    print(f"After sorting the integer array in Descending Order: {nums}")
     print()
